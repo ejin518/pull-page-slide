@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="robots" content="index,follow">
+<title>Pull page slide</title>
+<link rel="stylesheet" href="http://test20.gamgakdesign.com/css/slick.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
+<link rel="stylesheet" href="/css/common.css" type="text/css">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+	<div id="section01"></div>
+	<div id="section02"></div>
+	<div id="section03"></div>
+	<div id="section04"></div>
+	<div id="section05"></div>
+<header>
+	<nav id="desktop-nav">
+		<ul>
+			<li class="active"><a href="#section01" class="page-scroll">section01</a><em></em></li>
+			<li><a href="#section02" class="page-scroll">section01</a><em></em></li>
+			<li><a href="#section03" class="page-scroll">section01</a><em></em></li>
+			<li><a href="#section04" class="page-scroll">section01</a><em></em></li>
+			<li><a href="#section05" class="page-scroll">section01</a><em></em></li>
+		</ul>
+	</nav>
+</header>
+<script id="rendered-js">
+jQuery(function ($) {
+  var topMenuHeight = $("#desktop-nav").outerHeight();
+  $("#desktop-nav").menuScroll(topMenuHeight);
+});
+
+jQuery.fn.extend({
+  menuScroll: function (offset) {
+    // Declare all global variables
+    var topMenu = this;
+    var topOffset = offset ? offset : 0;
+    var menuItems = $(topMenu).find("a");
+    var lastId;
+
+    // Save all menu items into scrollItems array
+    var scrollItems = $(menuItems).map(function () {
+      var item = $($(this).attr("href"));
+      if (item.length) {
+        return item;
+      }
+    });
+
+    // When the menu item is clicked, get the #id from the href value, then scroll to the #id element
+    $(topMenu).on("click", "a", function (e) {
+      var href = $(this).attr("href");
+
+   //   var offsetTop = href === "#" ? 0 : $(href).offset().top - topOffset;
+      var offsetTop = href === "#" ? 0 : $(href).offset().top;
+
+      $('html, body').stop().animate({
+        scrollTop: offsetTop },
+      300);
+      e.preventDefault();
+
+    });
+
+    // When page is scrolled
+    $(window).scroll(function () {
+      var nm = $("html").scrollTop();
+      var nw = $("body").scrollTop();
+      var fromTop = (nm > nw ? nm : nw) + topOffset;
+
+
+      // When the page pass one #id section, return all passed sections to scrollItems and save them into new array current
+      var current = $(scrollItems).map(function () {
+        if ($(this).offset().top <= fromTop)
+        return this;
+      });
+
+      // Get the most recent passed section from current array
+      current = current[current.length - 1];
+      var id = current && current.length ? current[0].id : "";
+      if (lastId !== id) {
+        lastId = id;
+        // Set/remove active class
+        $(menuItems).
+        parent().removeClass("active").
+        end().filter("[href='#" + id + "']").parent().addClass("active");
+      }
+
+    });
+  } });
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
