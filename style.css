@@ -38,8 +38,8 @@ header {
 	content:""; width:30px; height:30px; border-radius:50%; border:1px solid #fff; position:absolute; top:50%;right:-32px; transform:translate(-50%,-50%);
 } 
 
-#section01{height:100vh; background:black; }
-#section02{height:100vh; background:orange; }
-#section03{height:100vh; background:blue; }
-#section04{height:100vh; background:purple; }
-#section05{height:100vh; background:green; }
+#section01{height:100vh; background:url(bg01.jpg) center center no-repeat; }
+#section02{height:100vh; background:url(bg02.jpg) center center no-repeat; }
+#section03{height:100vh; background:url(bg03.jpg) center center no-repeat; }
+#section04{height:100vh; background:url(bg04.jpg) center center no-repeat; }
+#section05{height:100vh; background:url(bg05.jpg) center center no-repeat; }
